@@ -1,0 +1,64 @@
+class Solution:
+    def permutenew(self, l):
+        if len(l)==1:
+            return l[0]
+        else:   
+            lnew=[]
+            for a in l[0]:
+                for b in self.permutenew(l[1:]):
+                    lnew.append(a+b)
+            return lnew
+
+    def letterCombinations_2(digits: str):
+        keydict = {
+            "2": ["a","b","c"],
+            "3": ["d","e","f"],
+            "4": ["g","h","i"],
+            "5": ["j","k","l"],
+            "6": ["m", "n", "o"],
+            "7": ["p","q","r","s"],
+            "8": ["t","u","v"],
+            "9": ["w","x","y","z"]
+        }
+        result = []
+        for i in range(len(digits)):
+            print(result)
+            if result == []:
+                result = keydict[digits[i]]
+            else:
+                temp = []
+                for item in result:
+                    for subitem in keydict[digits[i]]:
+                        temp.append(item + subitem)
+                result = temp
+        return result
+    
+    def letterCombinations(self, digits):
+        Output =[]
+        mobile = {
+            '2': ['a','b','c'],
+            '3': ['d','e','f'],
+            '4': ['g','h','i'],
+            '5': ['j','k','l'],
+            '6': ['m','n','o'],
+            '7': ['p','q','r', 's'],
+            '8': ['t','u','v'],
+            '9': ['w','x','y','z']
+        }
+        # print(mobile.keys())
+        all_lists = []
+        if digits != "":
+            for digit in digits:
+                if digit in mobile.keys():
+                    all_lists.append(mobile.get(digit))
+            result = self.permutenew(all_lists)
+            return result
+        else:
+            return Output
+
+def main():
+    sol = Solution()
+    print(sol.letterCombinations(""))
+
+if __name__ == "__main__":
+    main() 
